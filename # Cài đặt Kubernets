@@ -1,8 +1,0 @@
-# Cài đặt Kubernets
-## 1. Môi trường
-	- Ubuntu 16.04 -64 bit ( 1 node master, 1 node worker, 2CPU core)
-	- Kubernets v1.16.0
-	- Docker version 17.05.0-ce
-## 2. IP planning
-	- Master node : 192.168.7.200
-	- Worker node : 192.168.7.213
