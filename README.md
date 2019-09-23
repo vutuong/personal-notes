@@ -17,6 +17,8 @@
 ### 3.1 Đặt hostname và ip cho node k8s-master
 
 - Thực hiện update và cài các gói bổ trợ
+
+
 `# apt-get update -y && apt-get upgrade -y
 `
 
@@ -48,6 +50,8 @@ Comment dòng trong file như bên dưới
 - Đặt hostnames trên máy Master bằng cách sửa file ```/etc/hosts``` và ```/etc/hostname```
 
  - Chạy lệnh dưới để khai báo hosts
+
+ 
 `# cat << EOF > /etc/hosts`
 
 
