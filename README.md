@@ -19,17 +19,28 @@
 - Thực hiện update và cài các gói bổ trợ
 `# apt-get update -y && apt-get upgrade -y
 `
+
+
 `# apt-get -y install -y vim curl wget
 `
+
+
 `# apt-get -y install byobu
 `
 
 - Tắt tính năng swap của OS
+
 `# swapoff -a
 `
+
+
 `# nano /etc/fstab
 `
+
+
 Comment dòng trong file như bên dưới
+
+
 `
 #UUID=9a1a3af1-7956-454f-9658-2557f2e55fc1 none            swap    sw              0       0
 `
@@ -37,42 +48,76 @@ Comment dòng trong file như bên dưới
 - Đặt hostnames trên máy Master bằng cách sửa file ```/etc/hosts``` và ```/etc/hostname```
 
  - Chạy lệnh dưới để khai báo hosts
-`# cat << EOF > /etc/hosts
-127.0.0.1       localhost k8s-master
-192.168.7.200       k8s-master
-192.168.7.213       k8s-node1
-EOF`
+`# cat << EOF > /etc/hosts`
+
+
+`127.0.0.1       localhost k8s-master`
+
+
+`192.168.7.200       k8s-master`
+
+
+`192.168.7.213       k8s-node1`
+
+
+`EOF`
 
  - Chạy lệnh dưới để khai báo hostname
+
+
 `# echo k8s-master > /etc/hostname`
+
+
  - Khởi động lại cho k8s-master
+
+
 `# init 6
 `
+
+
  - *Chú ý*: Do worker node là máy ảo trên master node nên khi khởi động lại master node sẽ tắt luôn cả worker node.
 
 ### 3.2 Đặt hostname và ip cho node k8s-node1
 
 - Thực hiện update và cài các gói bổ trợ
+
+
 `# apt-get update -y && apt-get upgrade -y
 `
+
+
 `# apt-get -y install -y vim curl wget
 `
+
+
 `# apt-get -y install byobu
 `
 
+
 - Tắt tính năng swap của OS
+
+
 `# swapoff -a
 `
+
+
 `# nano /etc/fstab
 `
+
+
 Comment dòng trong file như bên dưới
+
+
 `
 #UUID=9a1a3af1-7956-454f-9658-2557f2e55fc1 none            swap    sw              0       0
 `
 
+
 - Đặt hostnames trên máy Master bằng cách sửa file ```/etc/hosts``` và ```/etc/hostname```
 
  - Chạy lệnh dưới để khai báo hosts
+
+
 `# cat << EOF > /etc/hosts`
 
 
@@ -101,28 +146,52 @@ Trên tất cả các node sẽ cài các thành phần: `docker`, `kubelet`, `k
 
 ### 4.1 Cài đặt docker trên tất cả các node
 
+
 `# sudo su`
+
+
 `# apt-get update `
+
+
 `# apt-get install -y docker.io`
+
 
 ### 4.2 Cài đặt các thành phần của Kubernet trên tất cả các node
 
+
 `# apt-get update && apt-get install -y apt-transport-https curl
 `
+
+
 `# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 `
-`# cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb http://apt.kubernetes.io/ kubernetes-xenial main
-EOF`
+
+
+`# cat <<EOF >/etc/apt/sources.list.d/kubernetes.list`
+
+
+`deb http://apt.kubernetes.io/ kubernetes-xenial main`
+
+
+`EOF`
+
+
 `# apt-get update`
+
+
 `# apt-get install -y kubelet kubeadm kubectl`
+
 
 ### 4.3 Cập nhật configuration cho Kubernet
 
 Mở file
+
+
 `# nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf`
 
 Thêm lệnh như sau trên dòng `ExecStart=`
+
+
 `Environment=”cgroup-driver=systemd/cgroup-driver=cgroupfs”`
 
 ### 4.4 Thiết lập Cluster
@@ -143,12 +212,20 @@ Thêm lệnh như sau trên dòng `ExecStart=`
 `# export KUBECONFIG=/etc/kubernetes/admin.conf`
 
 - Cách 2: Khai báo cố định biến môi trường khi đó không cần export như trên nữa
+
+
 `# mkdir -p $HOME/.kube
 `
+
+
 `# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 `
+
+
 `# sudo chown $(id -u):$(id -g) $HOME/.kube/config
 `
+
+
 Tới đây tiếp theo cài đặt Pod network trước khi join các node worker khác.
 
 ### 4.6 Cài đặt Pod network
@@ -173,13 +250,20 @@ Tới đây tiếp theo cài đặt Pod network trước khi join các node work
 - Để join worker node vào cluster thì copy đoạn mã `kubeadm join ...` ở thông báo sau khi `kubeadm init`
 - Run đoạn mã trên ở node worker
 - Sau khi thông báo hoàn tất có thể sang Master node kiểm tra các node đã Ready chưa:
+
 `# export KUBECONFIG=/etc/kubernetes/admin.conf
 `
+
+
 `# kubectl get nodes
 `
+
+
 - Kiểm tra các thành phần ( pod) trong Kubernet đã Running hết chưa:
 `kubectl get pod --all-namespaces
 `
+
+
 - Nếu các thành phần ở trạng thái Running là thiết lập thành công. Đến đây có thể tiếp tục chạy các ứng dụng.
 
 ## 5. Các link tham khảo
