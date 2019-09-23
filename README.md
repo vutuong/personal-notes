@@ -73,11 +73,19 @@ Comment dòng trong file như bên dưới
 - Đặt hostnames trên máy Master bằng cách sửa file ```/etc/hosts``` và ```/etc/hostname```
 
  - Chạy lệnh dưới để khai báo hosts
-`# cat << EOF > /etc/hosts
-127.0.0.1       localhost k8s-master
-192.168.7.200       k8s-master
-192.168.7.213       k8s-node1
-EOF`
+`# cat << EOF > /etc/hosts`
+
+
+`127.0.0.1       localhost k8s-master`
+
+
+`192.168.7.200       k8s-master`
+
+
+`192.168.7.213       k8s-node1`
+
+
+`EOF`
 
  - Chạy lệnh dưới để khai báo hostname
 `# echo k8s-node1 > /etc/hostname`
@@ -153,8 +161,10 @@ Tới đây tiếp theo cài đặt Pod network trước khi join các node work
 `
 
 - Sau khi cài xong kiểm tra lại node Master đã ready chưa:
+
 `# export KUBECONFIG=/etc/kubernetes/admin.conf
 `
+
 `# kubectl get nodes
 `
 
@@ -172,7 +182,7 @@ Tới đây tiếp theo cài đặt Pod network trước khi join các node work
 `
 - Nếu các thành phần ở trạng thái Running là thiết lập thành công. Đến đây có thể tiếp tục chạy các ứng dụng.
 
-## 4. Các link tham khảo
+## 5. Các link tham khảo
 - https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md
 - https://www.edureka.co/blog/install-kubernetes-on-ubuntu
 - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
