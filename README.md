@@ -11,6 +11,6 @@
 	ip trong file `/etc/network/interface` (tức là IP để mặc định, máy VM để chế độ bride để có thể ssh từ ngoài)
 ### 3.1 Đặt hostname và ip cho node k8s-master
 	* Thực hiện update và cài các gói bổ trợ
-	`apt-get update -y && apt-get upgrade -y
+	```apt-get update -y && apt-get upgrade -y
 	apt-get -y install -y vim curl wget 
-	apt-get -y install byobu`
+	apt-get -y install byobu```
