@@ -48,7 +48,7 @@ EOF`
  - Khởi động lại cho k8s-master
 `# init 6
 `
-*Chú ý*: Do worker node là máy ảo trên master node nên khi khởi động lại master node sẽ tắt luôn cả worker node.
+ - *Chú ý*: Do worker node là máy ảo trên master node nên khi khởi động lại master node sẽ tắt luôn cả worker node.
 
 ### 3.2 Đặt hostname và ip cho node k8s-node1
 
@@ -119,7 +119,68 @@ Thêm lệnh như sau trên dòng `ExecStart=`
 
 ### 4.4 Thiết lập Cluster
 
-`#kubeadm init --apiserver-advertise-address 192.168.7.200 --pod-network-cidr=192.168.0.0/16`
+`# kubeadm init --apiserver-advertise-address 192.168.7.200 --pod-network-cidr=192.168.0.0/16`
+
+- Trong đó `--apiserver-advertise-address` được dùng để quảng bá địa chỉ cho control-plane node's API server.
+`--control-plane-endpoint` được dùng để đặt shared end point cho toàn bộ control-plane nodes.
+`--pod-network-cidr=192.168.0.0/16` trong hướng dẫn này sử dụng pod network add-on kiểu Calio nên cần khai báo dạng Pod network này.
+
+- Các kiểu pod network add-on được ghi chú ở link https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
+- Sau khi chạy thành công quan sát cửa sổ và thực hiện như thông báo. Dòng `kubeadm join ...` thực hiện sau
+
+### 4.5 Sử dụng tài khoản root để thao tác với K8S
+
+- Cách 1: để sử dụng được lệnh của K8s thì cần thực hiện lệnh sau:
+`# export KUBECONFIG=/etc/kubernetes/admin.conf`
+
+- Cách 2: Khai báo cố định biến môi trường khi đó không cần export như trên nữa
+`# mkdir -p $HOME/.kube
+`
+`# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+`
+`# sudo chown $(id -u):$(id -g) $HOME/.kube/config
+`
+Tới đây tiếp theo cài đặt Pod network trước khi join các node worker khác.
+
+### 4.6 Cài đặt Pod network
+
+- Đứng trên Master node cài đặt. Có nhiều giải pháp thực hiện như ở đây do setup mạng tôi chọn dùng Calico.
+Để dùng được Calico thì cần phải khai báo trước `--pod-network-cidr=192.168.0.0/16` trong `kubeadm init`.
+- Calico chỉ dùng cho `amd64`, `arm64` và `ppc64le`
+
+`# kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+`
+
+- Sau khi cài xong kiểm tra lại node Master đã ready chưa:
+`# export KUBECONFIG=/etc/kubernetes/admin.conf
+`
+`# kubectl get nodes
+`
+
+### 4.7 Join worker node vào cluster
+
+- Để join worker node vào cluster thì copy đoạn mã `kubeadm join ...` ở thông báo sau khi `kubeadm init`
+- Run đoạn mã trên ở node worker
+- Sau khi thông báo hoàn tất có thể sang Master node kiểm tra các node đã Ready chưa:
+`# export KUBECONFIG=/etc/kubernetes/admin.conf
+`
+`# kubectl get nodes
+`
+- Kiểm tra các thành phần ( pod) trong Kubernet đã Running hết chưa:
+`kubectl get pod --all-namespaces
+`
+- Nếu các thành phần ở trạng thái Running là thiết lập thành công. Đến đây có thể tiếp tục chạy các ứng dụng.
+
+## 4. Các link tham khảo
+- https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md
+- https://www.edureka.co/blog/install-kubernetes-on-ubuntu
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
+
+
+
+
 
  
 
