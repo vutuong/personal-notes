@@ -19,7 +19,7 @@
 - Thực hiện update và cài các gói bổ trợ
 
 
-`# apt-get update -y && apt-get upgrade -y
+`# apt-get update -y && sudo apt-get upgrade -y
 `
 
 
