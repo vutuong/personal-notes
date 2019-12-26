@@ -238,7 +238,7 @@ Tới đây tiếp theo cài đặt Pod network trước khi join các node work
 Để dùng được Calico thì cần phải khai báo trước `--pod-network-cidr=192.168.0.0/16` trong `kubeadm init`.
 - Calico chỉ dùng cho `amd64`, `arm64` và `ppc64le`
 
-`# kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+`# kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 `
 
 - Sau khi cài xong kiểm tra lại node Master đã ready chưa:
