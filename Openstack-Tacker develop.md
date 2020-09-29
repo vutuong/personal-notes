@@ -7,10 +7,15 @@ https://docs.openstack.org/tacker/latest/install/devstack.html
 https://docs.openstack.org/devstack/latest/
 `
 Note: There are some bugs need to be fixed before success installation
+
 3. After openstack-tacker is running open the dashboard as the logs
+
 4. Run the following command to check the tacker service
 `
 stack@dcn:~/devstack$ systemctl | grep tacker
+`
+
+`
 stack@dcn:~/devstack$ systemctl status  devstack@tacker.service
 ● devstack@tacker.service - OpenStack tacker service
    Loaded: loaded (/etc/systemd/system/devstack@tacker.service; enabled; vendor preset: enabled)
@@ -31,10 +36,14 @@ Sep 28 21:12:01 dcn tacker-server[16277]: 2020-09-28 21:12:01.224 INFO tacker.ws
 Sep 28 21:12:01 dcn tacker-server[16277]: 2020-09-28 21:12:01.976 DEBUG tacker.wsgi [-] (16277) accepted ('192.168.10.99', 37174) from (pid=16277) server /usr/local/lib/python3.6/di
 Sep 28 21:12:01 dcn tacker-server[16277]: 2020-09-28 21:12:01.980 INFO tacker.wsgi [-] 192.168.10.99 - - [28/Sep/2020 21:12:01] "GET / HTTP/1.1" 200 254 0.001566
 `
+
+
 4. Stop tacker service:
 `
 $ systemctl stop devstack@tacker.service
 `
+
+
 5. Changes or fix the tacker sourcecode and then run the following command to check:
 `
 # /usr/bin/python3.6 /usr/local/bin/tacker-server --config-file /etc/tacker/tacker.conf
