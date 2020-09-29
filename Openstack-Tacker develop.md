@@ -11,8 +11,6 @@ Note: There are some bugs need to be fixed before success installation
 4. Run the following command to check the tacker service
 `
 stack@dcn:~/devstack$ systemctl | grep tacker
-`
-`
 stack@dcn:~/devstack$ systemctl status  devstack@tacker.service
 ● devstack@tacker.service - OpenStack tacker service
    Loaded: loaded (/etc/systemd/system/devstack@tacker.service; enabled; vendor preset: enabled)
