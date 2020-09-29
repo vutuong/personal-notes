@@ -48,3 +48,7 @@ $ systemctl stop devstack@tacker.service
 ```
 # /usr/bin/python3.6 /usr/local/bin/tacker-server --config-file /etc/tacker/tacker.conf
 ```
+6. To The typical usage to break into the debugger from a running program is to insert
+```
+import pdb; pdb.set_trace()
+```
