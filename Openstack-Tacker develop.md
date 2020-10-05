@@ -52,7 +52,9 @@ $ systemctl stop devstack@tacker.service
 ```
 import pdb; pdb.set_trace()
 ```
-7. install git review
+7. 
+```
+install git review
 add sshkey
 git add remote gerrit
 create user name opendev review
@@ -61,3 +63,4 @@ git pull origin-master
 git add file
 git commit -a 
 git review
+```
