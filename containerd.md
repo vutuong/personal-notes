@@ -1,3 +1,15 @@
+Instal dependencies:
+```
+sudp apt install make
+   90  sudo apt install make
+   91  clear
+   92  make
+   93  apt-get install build-essential
+   94  sudo apt-get install build-essential
+   95  make
+   96  apt-get install pkg-config
+   97  sudo apt-get install pkg-config
+```
 Install containerd:
 ```
 tar -xvf containerd-1.3.6-linux-amd64.tar.gz -C containerd
