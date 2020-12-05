@@ -1,12 +1,13 @@
+Install containerd:
 ```
 tar -xvf containerd-1.3.6-linux-amd64.tar.gz -C containerd
 sudo mv containerd/bin/* /bin/
-I just cloned your repo feature/checkpoint-restore.
+
 $ cd cri
 $ make
 $ cd _output
 $ mv contained /bin/
-Did I miss any step?
+
 ubuntu@worker:~$ cat /etc/systemd/system/containerd.service
 [Unit]
 Description=containerd container runtime
