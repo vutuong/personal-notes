@@ -39,3 +39,4 @@ LimitCORE=infinity
 [Install]
 WantedBy=multi-user.target
 ```
+Uninstall CRIU: ```criu-3.15$ sudo make uninstall```
