@@ -46,3 +46,9 @@ $ nano /etc/criu/runc.conf
 tcp-established
 tcp-close
 ```
+### Change containerd-cri
+```
+$ wget https://k8s-pod-migration.obs.eu-de.otc.t-systems.com/v3/containerd
+$ whereis containerd
+$ mv containerd /usr/bin/
+```
