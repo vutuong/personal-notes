@@ -16,6 +16,7 @@ helm search kubefed
 helm --namespace kube-federation-system upgrade -i kubefed kubefed-charts/kubefed --create-namespace
 kubectl get pods -n kube-federation-system
 ```
+```
 kubectl config get-contexts
 kubectl -n kube-federation-system get kubefedclusters
 ```
