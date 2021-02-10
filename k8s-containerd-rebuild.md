@@ -20,7 +20,7 @@ dcn@worker1:~$ chmod +x containerd
 dcn@worker1:~$ sudo mv containerd /bin/
 dcn@worker1:~$
 dcn@worker1:~$ systemctl restart containerd
-
+```
 - Remove docker:
 ```
 sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli
