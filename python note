@@ -1,0 +1,7 @@
+Cách để tạo venv trong python:
+mkdir project
+cd project
+pyenv virtualenv 3.6.5 venv_test
+pyenv activate venv_test
+Kiểm tra thư mục cho interpreter ansible:
+pyenv which python
